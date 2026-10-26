@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Calendar | RLT TSA</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+         ========================= -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            RLT TSA
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="events.html">
+                Events
+            </a>
+
+            <a
+                href="calendar.html"
+                class="active"
+            >
+                Calendar
+            </a>
+
+            <a href="resources.html">
+                Resources
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         CALENDAR PAGE
+         ========================= -->
+
+    <section class="events-hero">
+        <div class="section-label">RLT TSA • 2026–27</div>
+        <h1>Calendar</h1>
+        <p class="events-intro">
+            Important dates and events throughout the RLT TSA year.
+        </p>
+    </section>
+
+    <main class="calendar-page">
+
+
+        <!-- =========================
+             CALENDAR LAYOUT
+             ========================= -->
+
+        <section class="calendar-layout">
+
+
+            <!-- =====================
+                 LEFT SIDEBAR
+                 ===================== -->
+
+            <aside class="calendar-sidebar">
+
+
+                <!-- EVENTS -->
+
+                <div class="calendar-control">
+
+                    <button
+                        id="events-button"
+                        class="calendar-control-button"
+                        type="button"
+                    >
+
+                        <span>
+                            Events
+                        </span>
+
+                        <span class="control-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        id="events-menu"
+                        class="calendar-control-menu"
+                    >
+
+                        <button
+                            class="event-select active"
+                            data-event="all"
+                            type="button"
+                        >
+                            All Events
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CURRENT SELECTION -->
+
+                <div
+                    id="calendar-selection"
+                    class="calendar-selection"
+                >
+
+                    <span class="selection-label">
+                        VIEWING
+                    </span>
+
+                    <strong>
+                        All Events
+                    </strong>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =====================
+                 CALENDAR
+                 ===================== -->
+
+            <section class="calendar-container">
+
+
+                <!-- MONTH NAVIGATION -->
+
+                <div class="calendar-navigation">
+
+                    <button
+                        id="previous-month"
+                        class="calendar-arrow"
+                        type="button"
+                        aria-label="Previous month"
+                    >
+                        ←
+                    </button>
+
+
+                    <h2
+                        id="calendar-month-title"
+                        class="calendar-current-month"
+                    >
+                        September 2026
+                    </h2>
+
+
+                    <button
+                        id="next-month"
+                        class="calendar-arrow"
+                        type="button"
+                        aria-label="Next month"
+                    >
+                        →
+                    </button>
+
+                </div>
+
+
+                <!-- CALENDAR GRID -->
+
+                <section
+                    id="calendar-year"
+                    class="calendar-year"
+                ></section>
+
+
+                <!-- LEGEND -->
+
+                <div class="calendar-legend">
+
+                    <div class="legend-item">
+
+                        <span class="legend-dot"></span>
+
+                        <span>
+                            Important Date
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="calendar.js"></script>
+
+</body>
+
+</html>

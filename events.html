@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Events | RLT TSA</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Event list and description layout */
+        .events-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .events-layout .event-list {
+            min-width: 0;
+        }
+
+        /* Description panel */
+        .event-description {
+            position: sticky;
+            top: 100px;
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 220px;
+            padding: 26px;
+            background: #fff;
+            border: 1px solid #e1e5eb;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(20, 35, 60, 0.06);
+            overflow-wrap: anywhere;
+            transition: border-color 0.2s ease,
+                        box-shadow 0.2s ease;
+        }
+
+        .event-description.is-active {
+            border-color: #b8c9ed;
+            box-shadow: 0 10px 28px rgba(20, 50, 100, 0.10);
+        }
+
+        .description-label {
+            margin-bottom: 14px;
+            color: #4266a5;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .event-description h3 {
+            margin: 0 0 12px;
+            color: #17243b;
+            font-size: 22px;
+            line-height: 1.3;
+        }
+
+        .event-description p {
+            margin: 0;
+            color: #586579;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .description-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #edf0f4;
+            color: #7b8798;
+            font-size: 11px;
+        }
+
+        .description-dot {
+            width: 7px;
+            height: 7px;
+            flex-shrink: 0;
+            background: #5479bd;
+            border-radius: 50%;
+        }
+
+        /* Event quiz button */
+        .quiz-cta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 20px 0 32px;
+            padding: 20px 24px;
+            background: #eef3fc;
+            border: 1px solid #d4e0f5;
+            border-radius: 14px;
+        }
+
+        .quiz-cta-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .quiz-cta-copy strong {
+            color: #17243b;
+            font-size: 17px;
+        }
+
+        .quiz-cta-copy span {
+            color: #586579;
+            font-size: 14px;
+        }
+
+        .quiz-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 22px;
+            background: #4266a5;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 999px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .quiz-button:hover,
+        .quiz-button:focus-visible {
+            background: #2f4f86;
+            transform: translateY(-2px);
+        }
+
+        .event-item {
+            transition: border-color 0.2s ease,
+                        box-shadow 0.2s ease;
+        }
+
+        .event-item:hover,
+        .event-item:focus-visible {
+            border-color: #b8c9ed;
+            border-left-color: #315b7d;
+            box-shadow: 0 8px 22px rgba(20, 50, 100, 0.10);
+        }
+
+        @media (max-width: 850px) {
+            .events-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .event-description {
+                position: static;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">RLT TSA</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="events.html" class="active">Events</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="resources.html">Resources</a>
+        </div>
+    </nav>
+
+    <section class="events-hero">
+        <div class="section-label">RLT TSA • HIGH SCHOOL</div>
+
+        <h1>Competitive<br>Events</h1>
+
+        <p class="events-intro">
+            Explore RLT TSA competitive events, find events that match
+            your interests, and discover opportunities to compete,
+            create, design, and innovate.
+        </p>
+    </section>
+
+    <main class="events-container">
+
+        <section class="event-filters">
+
+            <div class="search-container">
+                <label for="event-search">Search Events</label>
+                <input
+                    type="text"
+                    id="event-search"
+                    placeholder="Search by event name..."
+                >
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-group-title">Event Type</div>
+                <div class="filter-options">
+                    <button class="filter-button active" data-filter="type" data-value="all">All</button>
+                    <button class="filter-button" data-filter="type" data-value="art">Art &amp; Design</button>
+                    <button class="filter-button" data-filter="type" data-value="technology">Technology</button>
+                    <button class="filter-button" data-filter="type" data-value="engineering">Engineering</button>
+                    <button class="filter-button" data-filter="type" data-value="science">Science</button>
+                    <button class="filter-button" data-filter="type" data-value="communication">Communication</button>
+                    <button class="filter-button" data-filter="type" data-value="manufacturing">Manufacturing</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-group-title">Competition Format</div>
+                <div class="filter-options">
+                    <button class="filter-button active" data-filter="format" data-value="all">All</button>
+                    <button class="filter-button" data-filter="format" data-value="onsite">Onsite</button>
+                    <button class="filter-button" data-filter="format" data-value="presubmit">Pre-submit</button>
+                    <button class="filter-button" data-filter="format" data-value="both">Both</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-group-title">Participation</div>
+                <div class="filter-options">
+                    <button class="filter-button active" data-filter="participation" data-value="all">All</button>
+                    <button class="filter-button" data-filter="participation" data-value="individual">Individual</button>
+                    <button class="filter-button" data-filter="participation" data-value="team">Team</button>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="quiz-cta">
+            <div class="quiz-cta-copy">
+                <strong>Not sure where to start?</strong>
+                <span>Take a quick quiz to find the events that fit you best.</span>
+            </div>
+            <a class="quiz-button"
+               href="https://rl-turner-tsa.parkmic74.chatgpt.site/"
+               target="_blank"
+               rel="noopener noreferrer">Take the Event Quiz ↗</a>
+        </div>
+
+        <div class="event-section-header">
+            <h2>Events</h2>
+            <p id="event-count">Showing all events</p>
+        </div>
+
+        <div class="events-layout">
+
+            <section class="event-list">
+
+                <a href="event.html?event=animatronics" class="event-item" data-type="engineering" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Animatronics</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=architectural-design" class="event-item" data-type="engineering" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Architectural Design</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=artificial-intelligence" class="event-item" data-type="technology" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Artificial Intelligence</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=audio-podcasting" class="event-item" data-type="communication" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Audio Podcasting</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=automated-manufacturing-systems" class="event-item" data-type="manufacturing" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Automated Manufacturing Systems</h3></div>
+                    <div class="event-tags"><span>Manufacturing</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=biotechnology-design" class="event-item" data-type="science" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Biotechnology Design</h3></div>
+                    <div class="event-tags"><span>Science</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=board-game-design" class="event-item" data-type="art" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Board Game Design</h3></div>
+                    <div class="event-tags"><span>Art</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=chapter-team" class="event-item" data-type="communication" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Chapter Team</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=childrens-stories" class="event-item" data-type="art" data-format="onsite" data-participation="both">
+                    <div class="event-info"><h3>Children's Stories</h3></div>
+                    <div class="event-tags"><span>Art</span><span>On-Site</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=cad-architecture" class="event-item" data-type="technology" data-format="onsite" data-participation="individual">
+                    <div class="event-info"><h3>Computer-Aided Design (CAD), Architecture</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>On-Site</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=cad-engineering" class="event-item" data-type="engineering" data-format="onsite" data-participation="individual">
+                    <div class="event-info"><h3>Computer-Aided Design (CAD), Engineering</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=cybersecurity" class="event-item" data-type="technology" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Cybersecurity</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=data-science-and-analytics" class="event-item" data-type="technology" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Data Science and Analytics</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=debating-technological-issues" class="event-item" data-type="communication" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Debating Technological Issues</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=digital-video-production" class="event-item" data-type="communication" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Digital Video Production</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=dragster-design" class="event-item" data-type="engineering" data-format="onsite" data-participation="individual">
+                    <div class="event-info"><h3>Dragster Design</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=drone-challenge-uav" class="event-item" data-type="engineering" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Drone Challenge (UAV)</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=engineering-design" class="event-item" data-type="engineering" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Engineering Design</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=extemporaneous-speech" class="event-item" data-type="communication" data-format="onsite" data-participation="individual">
+                    <div class="event-info"><h3>Extemporaneous Speech</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>On-Site</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=fashion-design-and-technology" class="event-item" data-type="art" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Fashion Design and Technology</h3></div>
+                    <div class="event-tags"><span>Art</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=flight-endurance" class="event-item" data-type="engineering" data-format="onsite" data-participation="individual">
+                    <div class="event-info"><h3>Flight Endurance</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=forensic-science" class="event-item" data-type="science" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Forensic Science</h3></div>
+                    <div class="event-tags"><span>Science</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=future-technology-and-engineering-teacher" class="event-item" data-type="technology" data-format="both" data-participation="individual">
+                    <div class="event-info"><h3>Future Technology and Engineering Teacher</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>Both</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=hybrid-racer-xl" class="event-item" data-type="engineering" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Hybrid Racer XL</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=interior-design" class="event-item" data-type="art" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Interior Design</h3></div>
+                    <div class="event-tags"><span>Art</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=manufacturing-prototype" class="event-item" data-type="manufacturing" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Manufacturing Prototype</h3></div>
+                    <div class="event-tags"><span>Manufacturing</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=music-production" class="event-item" data-type="art" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Music Production</h3></div>
+                    <div class="event-tags"><span>Art</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=on-demand-video" class="event-item" data-type="communication" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>On Demand Video</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=photographic-technology" class="event-item" data-type="art" data-format="both" data-participation="individual">
+                    <div class="event-info"><h3>Photographic Technology</h3></div>
+                    <div class="event-tags"><span>Art</span><span>Both</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=prepared-presentation" class="event-item" data-type="communication" data-format="both" data-participation="individual">
+                    <div class="event-info"><h3>Prepared Presentation</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>Both</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=promotional-design" class="event-item" data-type="art" data-format="both" data-participation="individual">
+                    <div class="event-info"><h3>Promotional Design</h3></div>
+                    <div class="event-tags"><span>Art</span><span>Both</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=robotics" class="event-item" data-type="engineering" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Robotics</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=software-development" class="event-item" data-type="technology" data-format="both" data-participation="team">
+                    <div class="event-info"><h3>Software Development</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>Both</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=stem-mass-media" class="event-item" data-type="communication" data-format="both" data-participation="team">
+                    <div class="event-info"><h3>STEM Mass Media</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>Both</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=structural-design-and-engineering" class="event-item" data-type="engineering" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Structural Design and Engineering</h3></div>
+                    <div class="event-tags"><span>Engineering</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=technology-bowl" class="event-item" data-type="technology" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Technology Bowl</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=technology-problem-solving" class="event-item" data-type="technology" data-format="onsite" data-participation="team">
+                    <div class="event-info"><h3>Technology Problem Solving</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>On-Site</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=transportation-modeling" class="event-item" data-type="manufacturing" data-format="onsite" data-participation="individual">
+                    <div class="event-info"><h3>Transportation Modeling</h3></div>
+                    <div class="event-tags"><span>Manufacturing</span><span>On-Site</span><span>Individual</span></div>
+                </a>
+
+                <a href="event.html?event=video-game-design" class="event-item" data-type="technology" data-format="both" data-participation="team">
+                    <div class="event-info"><h3>Video Game Design</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>Both</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=virtual-reality-simulation" class="event-item" data-type="technology" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Virtual Reality Simulation (VR)</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+                <a href="event.html?event=vlogging" class="event-item" data-type="communication" data-format="both" data-participation="team">
+                    <div class="event-info"><h3>Vlogging</h3></div>
+                    <div class="event-tags"><span>Communication</span><span>Both</span><span>Team</span></div>
+                </a>
+
+                <a href="event.html?event=webmaster" class="event-item" data-type="technology" data-format="both" data-participation="both">
+                    <div class="event-info"><h3>Webmaster</h3></div>
+                    <div class="event-tags"><span>Technology</span><span>Both</span><span>Individual / Team</span></div>
+                </a>
+
+            </section>
+
+            <aside id="event-description" class="event-description" aria-live="polite">
+                <div class="description-label">EVENT OVERVIEW</div>
+                <h3 id="description-title">Explore an event</h3>
+                <p id="description-text">
+                    Hover over any event to learn what it involves,
+                    what you will create, and the skills you can develop.
+                </p>
+                
+            </aside>
+
+        </div>
+
+        <div id="no-results" class="no-results">
+            <h3>No events found</h3>
+            <p>Try changing your filters or search term.</p>
+        </div>
+
+    </main>
+
+    <script>
+        /* =========================================
+           EVENT DESCRIPTIONS
+        ========================================= */
+
+        const eventDescriptions = {
+            "animatronics": "Design and build an animatronic device combining mechanical movement and creative design to bring an object or character to life.",
+            "architectural-design": "Plan and develop an architectural design, considering the function, layout, appearance, and needs of the people using the space.",
+            "artificial-intelligence": "Explore artificial intelligence and demonstrate how AI concepts or tools can be used to address a problem.",
+            "audio-podcasting": "Plan, record, and edit an audio podcast that communicates a topic or story through scripting, sound, and presentation.",
+            "automated-manufacturing-systems": "Explore automated production systems and demonstrate how machinery, controls, and manufacturing processes work together.",
+            "biotechnology-design": "Apply biotechnology concepts to a real-world challenge by researching a problem, developing a proposed solution, and presenting your design.",
+            "board-game-design": "Create an original board game with engaging rules, a clear objective, and thoughtful game mechanics.",
+            "chapter-team": "Work with teammates to complete TSA-related challenges that emphasize knowledge, communication, teamwork, and problem-solving.",
+            "childrens-stories": "Develop a children's story that communicates an idea through creative writing, storytelling, and visual elements.",
+            "cad-architecture": "Use computer-aided design software to create architectural drawings and demonstrate spatial planning and technical precision.",
+            "cad-engineering": "Use CAD software to create detailed engineering drawings or models with accurate dimensions and technical details.",
+            "cybersecurity": "Explore digital security, threats, and protective strategies while demonstrating analytical thinking and cybersecurity knowledge.",
+            "data-science-and-analytics": "Investigate data, identify patterns, and communicate findings using data analysis and visualization techniques.",
+            "debating-technological-issues": "Research a technological issue, develop evidence-based arguments, and defend your position in a structured debate.",
+            "digital-video-production": "Plan, film, and edit a video using storytelling, visual composition, sound, and editing techniques.",
+            "dragster-design": "Design and construct a dragster model, applying engineering principles, careful craftsmanship, and performance testing.",
+            "drone-challenge-uav": "Explore unmanned aerial vehicle technology and apply planning, piloting, and problem-solving skills to a drone challenge.",
+            "engineering-design": "Use the engineering design process to investigate a problem, develop a solution, create a design, and explain your decisions.",
+            "extemporaneous-speech": "Prepare and deliver a speech on an assigned topic within a limited preparation period.",
+            "fashion-design-and-technology": "Combine fashion and technology to develop a design concept that considers style, function, and construction.",
+            "flight-endurance": "Apply aerodynamic principles to design, build, and test a model aircraft intended to remain in flight.",
+            "forensic-science": "Use scientific reasoning to examine evidence, interpret findings, and investigate a simulated forensic case.",
+            "future-technology-and-engineering-teacher": "Explore technical education by developing and presenting ideas that demonstrate your ability to explain technology and engineering concepts.",
+            "hybrid-racer-xl": "Collaborate on a large-scale racing vehicle project, applying construction, engineering, and teamwork skills.",
+            "interior-design": "Develop an interior design concept that balances a space's function, appearance, layout, and intended users.",
+            "manufacturing-prototype": "Develop a prototype using manufacturing concepts, focusing on product design, construction, and improvement.",
+            "music-production": "Create a music production by combining musical ideas, recording, sound design, and digital audio editing.",
+            "on-demand-video": "Work with a team to plan and produce a video within a limited time, responding to a prompt and coordinating production.",
+            "photographic-technology": "Create compelling photographs using composition, camera techniques, and digital tools.",
+            "prepared-presentation": "Research a topic, organize your findings, and deliver a prepared presentation that communicates your ideas clearly.",
+            "promotional-design": "Create promotional materials using visual design, typography, and layout to communicate a message effectively.",
+            "robotics": "Explore robotics through robot design, construction, programming, or operation to complete technical challenges.",
+            "software-development": "Develop a software solution by planning, programming, testing, and presenting an application or digital product.",
+            "stem-mass-media": "Communicate a STEM topic through media, combining research, scripting, visual storytelling, and production techniques.",
+            "structural-design-and-engineering": "Apply structural engineering concepts to design and construct a structure while considering materials, stability, and performance.",
+            "technology-bowl": "Test technology knowledge through a team-based competition that emphasizes quick thinking and collaboration.",
+            "technology-problem-solving": "Analyze a technology-related problem, work toward a practical solution, and explain your team's reasoning.",
+            "transportation-modeling": "Design and construct a transportation model that demonstrates planning, technical skills, and attention to detail.",
+            "video-game-design": "Develop a video game concept or experience by combining game mechanics, design, programming, and storytelling.",
+            "virtual-reality-simulation": "Explore immersive digital environments by designing a virtual reality or simulation experience.",
+            "vlogging": "Create a vlog-style video that communicates a topic or experience through presentation, storytelling, and editing.",
+            "webmaster": "Design and develop a website that communicates information effectively through organization, visual design, navigation, and web development."
+        };
+
+        const eventItems = document.querySelectorAll(".event-item");
+        const filterButtons = document.querySelectorAll(".filter-button");
+        const searchInput = document.getElementById("event-search");
+        const eventCount = document.getElementById("event-count");
+        const noResults = document.getElementById("no-results");
+        const descriptionPanel = document.getElementById("event-description");
+        const descriptionTitle = document.getElementById("description-title");
+        const descriptionText = document.getElementById("description-text");
+
+        const defaultTitle = "Explore an event";
+        const defaultText = "Hover over any event to learn what it involves, what you will create, and the skills you can develop.";
+
+        let filters = {
+            type: [],
+            format: [],
+            participation: []
+        };
+
+        function showEventDescription(event) {
+            const url = new URL(event.href, window.location.href);
+            const slug = url.searchParams.get("event");
+            const title = event.querySelector("h3").textContent.trim();
+
+            descriptionTitle.textContent = title;
+            descriptionText.textContent =
+                eventDescriptions[slug] ||
+                "Explore this competitive event and develop your technical, creative, and problem-solving skills.";
+
+            descriptionPanel.classList.add("is-active");
+        }
+
+        eventItems.forEach(event => {
+            event.addEventListener("mouseenter", () => {
+                showEventDescription(event);
+            });
+
+            event.addEventListener("focus", () => {
+                showEventDescription(event);
+            });
+        });
+
+        function filterEvents() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            eventItems.forEach(event => {
+                const eventName = event.querySelector("h3").textContent.toLowerCase();
+                const type = event.dataset.type;
+                const format = event.dataset.format;
+                const participation = event.dataset.participation;
+
+                const matchesSearch = eventName.includes(searchTerm);
+
+                const matchesType =
+                    filters.type.length === 0 ||
+                    filters.type.includes(type);
+
+                const matchesFormat =
+                    filters.format.length === 0 ||
+                    filters.format.includes(format) ||
+                    (filters.format.includes("onsite") && format === "both") ||
+                    (filters.format.includes("presubmit") && format === "both");
+
+                const matchesParticipation =
+                    filters.participation.length === 0 ||
+                    filters.participation.includes(participation) ||
+                    (filters.participation.includes("individual") && participation === "both") ||
+                    (filters.participation.includes("team") && participation === "both");
+
+                const shouldShow =
+                    matchesSearch &&
+                    matchesType &&
+                    matchesFormat &&
+                    matchesParticipation;
+
+                event.style.display = shouldShow ? "" : "none";
+
+                if (shouldShow) {
+                    visibleCount++;
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.style.display = "block";
+                eventCount.textContent = "No events found";
+                descriptionTitle.textContent = defaultTitle;
+                descriptionText.textContent = defaultText;
+                descriptionPanel.classList.remove("is-active");
+            } else {
+                noResults.style.display = "none";
+                eventCount.textContent =
+                    `Showing ${visibleCount} event${visibleCount === 1 ? "" : "s"}`;
+            }
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const filterType = button.dataset.filter;
+                const filterValue = button.dataset.value;
+
+                if (filterValue === "all") {
+                    filters[filterType] = [];
+
+                    document.querySelectorAll(
+                        `.filter-button[data-filter="${filterType}"]`
+                    ).forEach(btn => btn.classList.remove("active"));
+
+                    button.classList.add("active");
+                } else {
+                    document.querySelectorAll(
+                        `.filter-button[data-filter="${filterType}"][data-value="all"]`
+                    ).forEach(btn => btn.classList.remove("active"));
+
+                    if (filters[filterType].includes(filterValue)) {
+                        filters[filterType] = filters[filterType].filter(
+                            value => value !== filterValue
+                        );
+                        button.classList.remove("active");
+                    } else {
+                        filters[filterType].push(filterValue);
+                        button.classList.add("active");
+                    }
+
+                    if (filters[filterType].length === 0) {
+                        document.querySelector(
+                            `.filter-button[data-filter="${filterType}"][data-value="all"]`
+                        ).classList.add("active");
+                    }
+                }
+
+                filterEvents();
+            });
+        });
+
+        searchInput.addEventListener("input", filterEvents);
+
+        filterEvents();
+    </script>
+
+</body>
+</html>

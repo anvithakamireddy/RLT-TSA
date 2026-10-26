@@ -1,0 +1,414 @@
+/* =========================================================
+   RESOURCES PAGE
+   Matches the event page: white cards, slate-blue accent,
+   small uppercase kickers, heavy headings.
+========================================================= */
+
+.resources-page {
+    --accent: #315b7d;
+    --ink: #17232c;
+    --body: #5e6b74;
+    --muted: #71808b;
+    --line: #dce5eb;
+
+    /* width and padding come from the shared rule in style.css */
+}
+
+/* Section photo (dress code, portfolio) */
+.res-split {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 22px;
+    align-items: stretch;
+}
+
+.res-photo {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(20, 50, 70, 0.05);
+}
+
+.res-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+}
+
+/* Show the whole image (e.g. the attire guide) without cropping */
+.res-photo--contain {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+}
+
+.res-photo--contain img {
+    height: auto;
+    object-fit: contain;
+}
+
+.res-section {
+    margin-bottom: 72px;
+}
+
+/* Section heading: index number + kicker + title */
+.res-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    margin-bottom: 18px;
+}
+
+.res-index {
+    padding-top: 6px;
+    color: #9bb2c2;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.res-kicker {
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.8px;
+}
+
+.res-section h2 {
+    color: var(--ink);
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.res-intro {
+    max-width: 720px;
+    margin: 0 0 26px 50px;
+    color: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.res-heading + .link-grid,
+.res-heading + .tip-list {
+    margin-top: 26px;
+}
+
+/* Link cards */
+.link-grid,
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.link-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 26px 26px 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(20, 50, 70, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.link-card:hover,
+.link-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: #b9cbd8;
+    box-shadow: 0 14px 32px rgba(20, 50, 70, 0.1);
+}
+
+.link-tag {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.link-card strong {
+    padding-right: 28px;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+}
+
+.link-card p {
+    color: var(--body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.link-arrow {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--accent);
+    font-size: 13px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.link-card:hover .link-arrow {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+/* Filled variant (event quiz) */
+.link-card--filled {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+.link-card--filled:hover,
+.link-card--filled:focus-visible {
+    background: #26496a;
+    border-color: #26496a;
+}
+
+.link-card--filled .link-tag,
+.link-card--filled p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.link-card--filled .link-arrow,
+.link-card--filled:hover .link-arrow {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--accent);
+}
+
+.form-uses {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #edf1f4;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+/* Info cards (dress code) */
+.info-card {
+    padding: 26px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(20, 50, 70, 0.05);
+}
+
+.info-card h3 {
+    margin-bottom: 14px;
+    color: var(--ink);
+    font-size: 17px;
+}
+
+.info-card ul,
+.rule-card ul {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.info-card li,
+.rule-card li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.info-card li::before,
+.rule-card li::before {
+    content: "";
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 8px;
+    height: 2px;
+    background: #9bb2c2;
+}
+
+/* Accordion rules */
+.rules-list {
+    border-top: 1px solid var(--line);
+}
+
+.rule-card {
+    border-bottom: 1px solid var(--line);
+}
+
+.rule-card summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 4px;
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.2s ease;
+}
+
+.rule-card summary::-webkit-details-marker {
+    display: none;
+}
+
+.rule-card summary:hover {
+    color: var(--accent);
+}
+
+.rule-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 400;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.rule-card[open] .rule-icon {
+    background: #edf4f8;
+    transform: rotate(45deg);
+}
+
+.rule-card ul {
+    max-width: 860px;
+    padding: 0 4px 24px;
+}
+
+/* Portfolio tips */
+.tip-list {
+    max-width: 920px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: tip;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(20, 50, 70, 0.05);
+}
+
+.tip-list li {
+    position: relative;
+    padding: 18px 24px 18px 64px;
+    border-bottom: 1px solid #edf1f4;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    counter-increment: tip;
+}
+
+.tip-list li:last-child {
+    border-bottom: none;
+}
+
+.tip-list li::before {
+    content: counter(tip, decimal-leading-zero);
+    position: absolute;
+    top: 19px;
+    left: 24px;
+    color: #9bb2c2;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.tip-list strong {
+    color: var(--ink);
+}
+
+.tip-list a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.tip-list a:hover {
+    text-decoration: underline;
+}
+
+/* Skills */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 50px;
+}
+
+.skill-tags span {
+    padding: 9px 16px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.res-footnote {
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .res-split {
+        grid-template-columns: 1fr;
+    }
+
+    .res-photo img {
+        aspect-ratio: 16 / 9;
+        min-height: 0;
+    }
+
+    .res-photo--contain img {
+        aspect-ratio: auto;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .res-heading {
+        gap: 14px;
+    }
+
+    .res-intro,
+    .skill-tags {
+        margin-left: 0;
+    }
+
+    .rule-card summary {
+        font-size: 16px;
+    }
+}
